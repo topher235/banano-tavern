@@ -1,0 +1,105 @@
+.board {
+  margin-top: 50px;
+  padding-bottom: 100px;
+}
+
+.card {
+  padding: 50px;
+  align-items: center;
+}
+
+.row-center {
+  align-items: center;
+}
+
+.content {
+  background: #5d4037;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.title-row {
+  border-radius: 10px;
+  background: #5d4037;
+  color: #FFF388;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.username-row {
+  margin-top: 25px;
+  color: #FFF388;
+}
+
+.email-row {
+  margin-top: 10px;
+  color: #FFF388;
+}
+
+.password-row {
+  margin-top: 10px;
+  color: #FFF388;
+}
+
+.submit-row {
+  margin-top: 50px;
+}
+
+.switch-row {
+  margin-top: 10px;
+}
+
+.sketch-text {
+  font-family: 'Handlee', cursive;
+  text-align: center;
+}
+
+.green-btn {
+  background: rgba(121, 85, 72, 0.75);
+  color: #00e676;
+  border-radius: 10;
+}
+
+.green-btn:hover {
+  background: #00e676;
+  color: black;
+}
+
+.yellow-btn {
+  background: rgba(121, 85, 72, 0.75);
+  color: #FFF388;
+}
+
+#switchBtn {
+  background: rgba(121, 85, 72, 0.75);
+  color: #FFF388;
+  border-radius: 10;
+}
+
+#switchBtn:hover {
+  background: #FFF388;
+  color: black;
+}
+
+#idUsername {
+  color: white;
+}
+
+#idEmail {
+  color: white;
+}
+
+#idPassword {
+  color: white;
+}
+
+.withdraw-btn {
+  background: rgba(121, 85, 72, 0.75);
+  color: #00e676;
+  border-radius: 10;
+}
+
+.withdraw-btn:not([disabled]):hover {
+  background: #00e676;
+  color: black;
+}
