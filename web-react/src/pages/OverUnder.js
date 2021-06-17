@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ResultsDialog from '../components/ResultsDialog.js';
 
 import { makeStyles } from '@material-ui/core';
@@ -7,13 +7,14 @@ import Typography from '@material-ui/core/Typography';
 
 import { Container, Col, Row } from 'react-bootstrap';
 
-import { sendBananoBet } from '../utils/banano.js';
+import { getAccountBalance, sendBananoBet } from '../utils/banano.js';
 import { getUserBananoAccount } from '../utils/db';
 import { getD6ValueFromSeeds, handleGameOver } from '../utils/game';
 import rollADie from 'roll-a-die';
 
 import 'wired-elements';
 import '../stylesheets/Die.css';
+import { UserContext } from '../hooks/UserContext.js';
 
 
 const useStyles = makeStyles(() => ({
@@ -66,7 +67,11 @@ const OverUnder = () => {
   const [guess, setGuess] = useState('equals');
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(null);
-  const [betValue, setBetValue] = useState(10);
+  const { user, setUser } = useContext(UserContext);
+  const [balance, setBalance] = useState(user.balance);
+  const [betValue, setBetValue] = useState(Math.min(1, balance));
+
+  
 
   const classes = useStyles();
 
@@ -99,6 +104,8 @@ const OverUnder = () => {
         await sleep(1500);
         setGameOver(true);
         handleGameOver(sessionStorage.getItem('uid'), total, guess, betValue, 2, 'Over/Under', prize);
+        const newBalance = didWinGame ? balance - betValue + prize : balance - betValue;
+        setUser({ ...user, balance: balance + newBalance })
       }
     }
     rollADie(options);
@@ -127,12 +134,14 @@ const OverUnder = () => {
   }
 
   const handleBetValueChange = (event) => {
-    setBetValue(event.target.value === '' ? 10 : Number(event.target.value));
+    setBetValue(event.target.value === '' ? 1 : Number(event.target.value));
   }
 
   const handleBlur = () => {
     if(betValue < 0) {
       setBetValue(0);
+    } else if(betValue > balance) {
+      setBetValue(balance);      
     } else if(betValue > 100) {
       setBetValue(100);
     }
@@ -175,7 +184,7 @@ const OverUnder = () => {
                     onBlur={handleBlur}
                     inputProps={{
                       step: 1,
-                      min: 1,
+                      min: 0,
                       max: 100,
                       type: 'number'
                     }} />
