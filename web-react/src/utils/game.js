@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 
-import { sendBananoBet } from './banano';
+import { receiveBet, sendBananoBet } from './banano';
 import { updateUserData, recordGame, getUserSeeds, getUserBananoAccount } from './db';
 
 
@@ -80,7 +80,8 @@ async function handleGameOver(uid, result, target, bet, numDice, gameName, prize
   if(prize > 0) {
     const userBanano = await getUserBananoAccount(uid);
     console.log(`Awarded ${prize} bananos to ${userBanano.bananoAddress}`)
-    sendBananoBet('tavern', userBanano.bananoAddress, prize);
+    await sendBananoBet('tavern', userBanano.bananoAddress, prize);
+    receiveBet(userBanano.seed);
   }
   const seeds = await getUserSeeds(uid);
   const datetime = Date.now().toString();

@@ -90,13 +90,22 @@ async function withdrawBanano(seed, acct, amount) {
   const raw = await bananojs.getRawStrFromBananoStr(amount.toString());
   const result = await bananojs.sendAmountToBananoAccount(seed, SEED_IX, acct, raw,
     (data) => { console.log('successfully withdrew bananos'); },
-    (error) => { throw(error); }
+    (error) => { console.log('There was an error withdrawing bananos.'); }
+  );
+}
+
+async function receiveBet(seed) {
+  bananojs.setBananodeApiUrl(BANANODE_API_URL);
+  await bananojs.receiveBananoDepositsForSeed(seed, SEED_IX, NODE_REPRESENTATIVE,
+    () => { console.log('successfully received deposits'); },
+    () => { console.log('There was an error receiving deposits for this account.'); }
   );
 }
 
 export {
   getAccountBalance,
   openNewBananoAccount,
+  receiveBet,
   sendBananoBet,
   sendTavernFaucet,
   withdrawBanano
