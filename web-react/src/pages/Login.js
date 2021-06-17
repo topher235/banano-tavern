@@ -65,11 +65,13 @@ const Login = (props) => {
     try {
       userData = await loginUser(formState.email, formState.password);
     } catch(error) {
+      
       if(error.message.includes("invalid")) {
         setError({ title: "There was a problem logging in!", msg: "The email or password you entered may be incorrect" });
       } else if(error.code.includes("auth/too-many-requests")) {
         setError({ title: "Too many login attempts!", msg: "This account has been temporarily disabled."})
       } else {
+        console.log(formState.username, formState.password)
         setError({ title: "There was a problem logging in!", msg: "An unknown error has occurred. BananoTavern may be closed. Please try again later." });
       }
     }

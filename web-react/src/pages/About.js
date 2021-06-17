@@ -4,7 +4,7 @@ import 'wired-elements';
 
 const useStyles = makeStyles(() => ({
   title: {
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     color: '#FFF388'
   },
   content: {
@@ -18,11 +18,11 @@ const useStyles = makeStyles(() => ({
     marginTop: 25,
   },
   sectionHeader: {
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     color: "#FFF388"
   },
   body: {
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     color: "white",
     marginTop: 50,
     marginBottom: 50

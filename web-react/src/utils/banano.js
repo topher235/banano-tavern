@@ -2,11 +2,11 @@ import * as bananojs from '@bananocoin/bananojs';
 import * as crypto from 'crypto';
 
 
-const TAVERN_ADDRESS = process.env.TAVERN_ADDRESS;
-const TAVERN_SEED = process.env.TAVERN_SEED;
-const BANANODE_API_URL = process.env.BANANODE_API_URL;
-const NODE_REPRESENTATIVE = process.env.NODE_REPRESENTATIVE;
-const SEED_IX = process.env.SEED_IX;
+const TAVERN_ADDRESS = process.env.REACT_APP_TAVERN_ADDRESS;
+const TAVERN_SEED = process.env.REACT_APP_TAVERN_SEED;
+const BANANODE_API_URL = process.env.REACT_APP_BANANODE_API_URL;
+const NODE_REPRESENTATIVE = process.env.REACT_APP_NODE_REPRESENTATIVE;
+const SEED_IX = process.env.REACT_APP_SEED_IX;
 
 
 async function getAccount(seed) {

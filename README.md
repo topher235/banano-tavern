@@ -7,7 +7,7 @@ provably fair cryptocurrency casino based on a variety of dice games. The provab
 fair algorithm is based off of this [MIT paper](https://courses.csail.mit.edu/6.857/2019/project/2-Cen-Fang-Jaba.pdf). User accounts and user data is tracked using Firebase's [authentication](https://firebase.google.com/docs/auth) 
 and [RealTime Database](https://firebase.google.com/docs/database). The UI components are from the [react material-ui library](https://material-ui.com/).
 
-[View the website.](https://firebase.banano-tavern.com)
+[View the website.](https://banano-tavern.web.app)
 
 ## Why did I make this?
 
@@ -23,3 +23,4 @@ From a technical perspective, I have a list of features I'd like to change or ad
 * Limiting account creation -- With the possibility of free money comes the opportunity for it to be abused. There are ways to limit account creation. For example, store the IP address of an account and don't allow more than a number of accounts associated with an IP address.
 * Design -- My design skills have always needed extra work over my code writing. The design of this app is simplistic and maybe a bit childish. It would be an interesting experience and a bit more realistic to hire a designer and implement their design.
 * Components -- There are a couple places in the code where logic can be off-loaded to a smaller component. This is mostly organizational.
+* Reset password -- The site is missing a reset password option.

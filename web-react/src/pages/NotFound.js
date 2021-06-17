@@ -10,7 +10,7 @@ import tree_right from '../img/tree_right.png';
 const useStyles = makeStyles(() => ({
   header: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
   },
   content: {
     background: "#5d4037",
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
   body: {
     color: "white",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     marginTop: 20,
   },
   images: {

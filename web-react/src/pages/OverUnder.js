@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
   radioLabelCol: {
     marginRight: 10,
     fontSize: 18,
-    fontFamily: 'Handlee, cursive',
+    fontFamily: 'Handlee',
     color: '#FFF388',
     '&:hover': {
       cursor: 'pointer'
@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
   },
   wagerLabelCol: {
     fontSize: 18,
-    fontFamily: 'Handlee, cursive',
+    fontFamily: 'Handlee',
     color: '#FFF388',
   },
   wagerRow: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
     color: "#FFF388"
   },
   input: {
-    fontFamily: 'Handlee, cursive',
+    fontFamily: 'Handlee',
     width: 42
   },
   content: {

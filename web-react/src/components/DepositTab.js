@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
   inputLabel: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     justifyContent: 'right',
     marginRight: 25
   },
@@ -43,7 +43,6 @@ const DepositTab = (props) => {
   useEffect(async () => {
     if(loading) {
       const account = await getUserBananoAccount(sessionStorage.getItem('uid'));
-      console.log(`deposit: ${account.bananoAddress}`);
       setAddress(account.bananoAddress);
       setLoading(false);
     }

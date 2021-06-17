@@ -17,6 +17,8 @@ async function addUserToDatabase(uid, username, bananoSeed, bananoAddress) {
       serverSeed: seeds.server,
       serverSeedHash: seeds.serverHash,
       clientSeed: seeds.client,
+      previousServerSeed: null,
+      previousClientSeed: null,
       nonce: 0,
       bananoSeed: bananoSeed,
       bananoAddress: bananoAddress
@@ -140,6 +142,7 @@ async function getUserGames(uid) {
         nonce: user.games[game].nonce,
         result: user.games[game].result,
         serverSeedHash: user.games[game].serverSeedHash,
+        serverSeed: user.games[game].serverSeed,
         target: user.games[game].target
       })
     }

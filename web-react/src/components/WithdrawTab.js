@@ -27,12 +27,12 @@ const useStyles = makeStyles(() => ({
   },
   inputLabel: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     justifyContent: 'right',
     marginRight: 25
   },
   input: {
-    fontFamily: 'Handlee, cursive',
+    fontFamily: 'Handlee',
     width: 42,
     color: 'white'
   },

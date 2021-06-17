@@ -18,7 +18,7 @@ function hashSeed(seed) {
 }
 
 function generateSeeds() {
-  const serverSeed = generateServerSeed();
+  const serverSeed = generateServerSeed().substring(0, 32);
   const serverSeedHash = hashSeed(serverSeed);
   const clientSeed = generateServerSeed().substring(0, 10);
   return {
@@ -67,7 +67,6 @@ async function getD6ValueFromSeeds(uid, dieNumber) {
   const combined = combine(seeds.serverSeed, seeds.clientSeed, seeds.nonce+dieNumber);
   const hashedCombined = hashSeed(combined);
   const outcome = computeD6Outcome(hashedCombined);
-  // console.log(`d6 result: ${outcome}`);
   return outcome;
 }
 
@@ -91,6 +90,7 @@ async function handleGameOver(uid, result, target, bet, numDice, gameName, prize
     result: result,
     target: target,
     bet: bet,
+    serverSeed: seeds.serverSeed,
     serverSeedHash: seeds.serverSeedHash,
     clientSeed: seeds.clientSeed,
     nonce: seeds.nonce,
@@ -102,9 +102,21 @@ async function handleGameOver(uid, result, target, bet, numDice, gameName, prize
   });
 }
 
+function validateResult(serverSeed, clientSeed, nonce, numDice) {
+  let results = [];
+  for(let i = 0; i < numDice; i++) {
+    const combined = combine(serverSeed, clientSeed, parseInt((nonce+i).toString(), 10));
+    const hashed = hashSeed(combined);
+    const outcome = computeD6Outcome(hashed);
+    results.push(outcome);
+  }
+  return results;
+}
+
 
 export {
   generateSeeds,
   getD6ValueFromSeeds,
-  handleGameOver
+  handleGameOver,
+  validateResult
 }

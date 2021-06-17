@@ -9,6 +9,7 @@ import DepositTab from '../components/DepositTab';
 import WithdrawTab from '../components/WithdrawTab';
 
 import 'wired-elements';
+import Validator from './Validator';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     textAlign: 'center'
   },
   tabContainer: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
   }
 }));
 
@@ -69,7 +70,7 @@ const Profile = () => {
     if(isLoading) {
       const uid = sessionStorage.getItem('uid');
       const games = await getUserGames(uid);
-      setRows(games);
+      setRows(games.sort(function(a, b) { return new Date(parseInt(b.date)) - new Date(parseInt(a.date)); }));
       const dbSeeds = await getUserSeeds(uid);
       // console.log(`seeds: ${dbSeeds}`);
       setSeeds(dbSeeds);
@@ -106,11 +107,13 @@ const Profile = () => {
               <Tab label="Seeds" className={classes.tab} {...a11yProps(1)} />
               <Tab label="Deposit" className={classes.tab} {...a11yProps(2)} />
               <Tab label="Withdraw" className={classes.tab} {...a11yProps(3)} />
+              <Tab label="Validate Result" className={classes.tab} {...a11yProps(4)} />
             </Tabs>
-          <GamesListTab tabValue={tabValue} tabIndex={0} rows={rows} />
+          <GamesListTab tabValue={tabValue} tabIndex={0} rows={rows} seeds={seeds} />
           <SeedGrid tabValue={tabValue} tabIndex={1} seeds={seeds} />
           <DepositTab tabValue={tabValue} tabIndex={2} />
           <WithdrawTab tabValue={tabValue} tabIndex={3} />
+          <Validator tabValue={tabValue} tabIndex={4} />
         </Container>
         </>)
       }

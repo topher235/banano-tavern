@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   },
   inputLabel: {
     color: "#FFF388",
-    fontFamily: 'handlee, cursive',
+    fontFamily: 'handlee',
     justifyContent: 'right',
     marginRight: 25
   },

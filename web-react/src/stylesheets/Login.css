@@ -50,7 +50,7 @@
 }
 
 .sketch-text {
-  font-family: 'Handlee', cursive;
+  font-family: 'Handlee';
   text-align: center;
 }
 
@@ -68,6 +68,11 @@
 .yellow-btn {
   background: rgba(121, 85, 72, 0.75);
   color: #FFF388;
+}
+
+.yellow-btn:hover {
+  background: #FFF388;
+  color: black;
 }
 
 #switchBtn {
