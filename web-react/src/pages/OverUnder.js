@@ -105,7 +105,7 @@ const OverUnder = () => {
         setGameOver(true);
         handleGameOver(sessionStorage.getItem('uid'), total, guess, betValue, 2, 'Over/Under', prize);
         const newBalance = didWinGame ? balance - betValue + prize : balance - betValue;
-        setUser({ ...user, balance: balance + newBalance })
+        setUser({ ...user, balance: parseInt(newBalance) })
       }
     }
     rollADie(options);

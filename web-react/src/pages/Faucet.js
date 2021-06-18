@@ -1,7 +1,8 @@
 import { makeStyles, CircularProgress } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import 'wired-elements';
 
+import { UserContext } from '../hooks/UserContext';
 import { hasUserClaimedFaucet, claimFaucet } from '../utils/user';
 
 
@@ -24,6 +25,7 @@ const Faucet = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [claimed, setClaimed] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(async () => {
     setClaimed(await hasUserClaimedFaucet(sessionStorage.getItem('uid')));
@@ -31,10 +33,13 @@ const Faucet = () => {
   }, [claimed]);
   
 
-  const handleClaimFaucet = () => {
+  const handleClaimFaucet = async () => {
     try {
-      claimFaucet(sessionStorage.getItem('uid'));
+      setLoading(true);
+      const faucetValue = await claimFaucet(sessionStorage.getItem('uid'));
       setClaimed(true);
+      setUser({ ...user, balance: parseInt(user.balance) + parseInt(faucetValue) });
+      setLoading(false);
     } catch(err) {
       // console.error(err);
     }

@@ -1,6 +1,6 @@
 import { signupUser } from './auth';
 import { addUserToDatabase, doesUserExist, getClaimedFaucet, getUserBananoAccount, updateUserData } from './db';
-import { openNewBananoAccount, sendTavernFaucet, getAccountBalance } from './banano';
+import { openNewBananoAccount, sendTavernFaucet, getAccountBalance, receiveBanano } from './banano';
 
 
 async function createUser(email, username, password) {
@@ -31,11 +31,14 @@ async function claimFaucet(uid) {
    * then send 10 bananos to that account
    * then update the database to show they have claimed the faucet
    */
+  const faucetValue = 10;
   const userBanano = await getUserBananoAccount(uid);
-  await sendTavernFaucet(userBanano.bananoAddress, 10);
+  const pendingHash = await sendTavernFaucet(userBanano.bananoAddress, faucetValue);
+  await receiveBanano(userBanano.bananoSeed, pendingHash);
   updateUserData(uid, {
     faucetClaimed: true
   });
+  return faucetValue;
 }
 
 async function getUserContext() {

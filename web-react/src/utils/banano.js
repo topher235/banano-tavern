@@ -64,18 +64,20 @@ async function sendBananoBet(sourceSeed, destinationAcct, amount) {
   }
   const rawBanano = await bananojs.getRawStrFromBananoStr(amount.toString());
   const result = await bananojs.sendAmountToBananoAccount(sourceSeed, SEED_IX, destinationAcct, rawBanano,
-    (data) => { console.log('successfully sent bananos'); },
+    (hash) => { return hash; },
     (error) => { console.error('There was an error sending bananos!'); }
   );
+  return result;
 }
 
 async function sendTavernFaucet(destinationAcct, amount) {
   bananojs.setBananodeApiUrl(BANANODE_API_URL);
   const rawBanano = await bananojs.getRawStrFromBananoStr(amount.toString());
   const result = await bananojs.sendAmountToBananoAccount(TAVERN_SEED, SEED_IX, destinationAcct, rawBanano, 
-    (data) => { console.log('successfully sent bananos'); },
+    (hash) => { return hash; },
     (error) => { console.error('There was an error tapping into the faucet!'); }
   );
+  return result;
 }
 
 async function getAccountBalance(acct) {
@@ -94,18 +96,15 @@ async function withdrawBanano(seed, acct, amount) {
   );
 }
 
-async function receiveBet(seed) {
+async function receiveBanano(seed, hash) {
   bananojs.setBananodeApiUrl(BANANODE_API_URL);
-  await bananojs.receiveBananoDepositsForSeed(seed, SEED_IX, NODE_REPRESENTATIVE,
-    () => { console.log('successfully received deposits'); },
-    () => { console.log('There was an error receiving deposits for this account.'); }
-  );
+  await bananojs.receiveBananoDepositsForSeed(seed, SEED_IX, NODE_REPRESENTATIVE, hash);
 }
 
 export {
   getAccountBalance,
   openNewBananoAccount,
-  receiveBet,
+  receiveBanano,
   sendBananoBet,
   sendTavernFaucet,
   withdrawBanano
