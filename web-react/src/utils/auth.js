@@ -25,7 +25,12 @@ async function loginUser(email, password) {
       });
 }
 
+async function deleteUser() {
+  firebase.auth().currentUser.delete();
+}
+
 export {
   signupUser,
-  loginUser
+  loginUser,
+  deleteUser
 }

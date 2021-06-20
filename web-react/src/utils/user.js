@@ -1,4 +1,4 @@
-import { signupUser } from './auth';
+import { signupUser, deleteUser } from './auth';
 import { addUserToDatabase, doesUserExist, getClaimedFaucet, getUserBananoAccount, updateUserData } from './db';
 import { openNewBananoAccount, sendTavernFaucet, getAccountBalance, receiveBanano } from './banano';
 
@@ -12,10 +12,12 @@ async function createUser(email, username, password) {
       addUserToDatabase(uid, username, bananoAccount.seed, bananoAccount.address);
       return { uid: uid, refreshToken: userData.refreshToken };
     } else {
-      console.error('There was an error creating the user in auth');
+      console.error('There was an error creating the user in auth ');
     }
   } catch(error) {
-    console.error('There was an error creating the user in auth');
+    deleteUser(email, password);
+    console.error('Caught an error creating the user in auth', error);
+    throw(error);
   }
 }
 
@@ -31,7 +33,7 @@ async function claimFaucet(uid) {
    * then send 10 bananos to that account
    * then update the database to show they have claimed the faucet
    */
-  const faucetValue = 10;
+  const faucetValue = 3;
   const userBanano = await getUserBananoAccount(uid);
   const pendingHash = await sendTavernFaucet(userBanano.bananoAddress, faucetValue);
   await receiveBanano(userBanano.bananoSeed, pendingHash);

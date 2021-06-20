@@ -39,7 +39,8 @@ async function openNewBananoAccount() {
   // Note the initializing banano account
   const initializingAccount = TAVERN_SEED;
   // Get the raw string from a small amount of banano
-  const rawBananoString = await bananojs.getRawStrFromBananoStr("0.001");
+  // const rawBananoString = await bananojs.getRawStrFromBananoStr("0.001");
+  const rawBananoString = "100000000000000000000000000";
   // Generate a random banano account address and seed
   const newBanAccount = await getRandomAccount();
   // We need to send a small amount of banano before we can open that account
